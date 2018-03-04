@@ -1,5 +1,7 @@
-# JavaScript DOM 读书笔记 1
+JavaScript DOM 读书笔记 1
 ========================
+
+# JavaScript语法
 
 1. <script>标签推荐做法是放在html文档的最后,</body>之前,可以让浏览器更快的加载页面。
 
@@ -70,7 +72,7 @@ s = "hello" * 3 // 不支持字符串的乘法操作
 NaN
 ```
 
-4. 判断
+5. 判断
 
 ```javascript
 if (condition) {
@@ -78,8 +80,11 @@ if (condition) {
 } else {
 	statements;
 }
+```
 
-// 比较
+6. 比较
+
+```javascript
 // ===/!==: 比较值 + 类型
 // ==/!=: 只比较值
 var a = false;
@@ -100,25 +105,96 @@ VM260:9 false !== "" is True
 // && || !
 ```
 
-5. 比较
+7. 循环
 
 ```javascript
-// ===/!==: 比较值 + 类型
-// ==/!=: 只比较值
-var a = false;
-var b = "";
-
-if (a == b) {
-	console.log('false == "" is True');
+while (condition) {
+	statements;
 }
 
-if (a !== b) {
-	console.log('false !== "" is True');
+do {
+	statements;
+} while (condition);  // 这里最后有一个;
+
+for (initial condition; test condition; alter condition) {
+	statements;
 }
 
-VM260:5 false == "" is True
-VM260:9 false !== "" is True
+var beatles = Array("John", "Paul", "George", "Ringo");
+for (var count=0; count<beatles.length; ++count) {
+	console.log(beatles[count]);
+}
+VM214:3 John
+VM214:3 Paul
+VM214:3 George
+VM214:3 Ringo
+```
 
-// 逻辑
-// && || !
+8. 函数
+
+```javascript
+function name(arguments) {
+	statements;
+}
+```
+
+9. 命名
+
+```javascript
+// 变量
+hello_world
+
+// 函数
+sayHi()
+```
+
+10. 变量作用域
+
+```javascript
+// 函数默认会使用全局变量,内部变量要明确声明为局部变量
+function square1(num) {
+	total = num * num;
+	return total;
+}
+var total = 50;
+var number = square1(20);
+console.log(number);
+console.log(total);
+
+function square2(num) {
+	var total = num * num;
+	return total;
+}
+var number = square2(10);
+console.log(number);
+console.log(total);
+
+VM220:7 400
+VM220:8 400
+VM220:15 100
+VM220:16 400
+```
+
+11. 对象
+
+```javascript
+// 对象就是由一些属性和方法组合在一起而构成的一个数据实体
+
+// 创建实例
+var jeremy = new Person;
+jeremy.age;
+
+// 内建对象
+var beatles = new Array();
+
+var num = 7.561;
+var num = Math.round(num);
+console.log(num);
+
+var current_date = new Date();
+var today = current_date.getDay();  // 星期几, getDate()这个月几号
+console.log(today);
+
+// 宿主对象(例如浏览器预定义的对象)
+// Form, Image, Element, document
 ```
