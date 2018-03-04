@@ -1,7 +1,7 @@
 JavaScript DOM 读书笔记 1
 ========================
 
-# JavaScript语法
+## JavaScript语法
 
 1. <script>标签推荐做法是放在html文档的最后,</body>之前,可以让浏览器更快的加载页面。
 
