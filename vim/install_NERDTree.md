@@ -1,13 +1,13 @@
 vim插件 NERDTree的安装
 ========================
 
-[Github](https://github.com/scrooloose/nerdtree)
+[NERDTree->Github](https://github.com/scrooloose/nerdtree)
 
 ## 安装
 
 1. 安装pathogen.vim
 
-[Github](https://github.com/tpope/vim-pathogen)
+[pathogen.vim->Github](https://github.com/tpope/vim-pathogen)
 
 在NERDTree的安装过程中有命令需要用到这个小工具,所以首先要安装这个东西。
 
@@ -40,6 +40,7 @@ git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
 ```bash
 # vim中输入下面命令即可看见目录树的效果
 :NERDTree
+```
 
 4. 分屏切换
 
