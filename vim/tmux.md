@@ -14,6 +14,9 @@ Prefix = <Ctrl+b>
 
 Prefix + %	split-window -h (split horizontally)
 Prefix + "	split-window -v (split vertically)
+
+# 调整分屏大小,按住Alt后按方向键
+Prefix + Alt + 方向键
 ```
 
 ## 新建window以及window之间的切换
