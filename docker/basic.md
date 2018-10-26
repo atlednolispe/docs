@@ -73,7 +73,6 @@ $ docker exec demo sh -c 'date > /b.txt'
 # 在 Dockerfile 文件中 # 是注释
 # FROM 用于指定构建镜像使用的基础镜像
 FROM ubuntu:18.04
- 
 
 # RUN 用于在构建镜像的时候在镜像中执行命令
 # 这里我们安装 python3 和 flask web 框架
@@ -215,6 +214,21 @@ services:
     # 每个服务必须用 image 指定镜像名或者从 Dockerfile 中 build
     # 这里用 image 指定镜像，redis:alpine 是 redis 项目的官方 Docker 镜像
     image: "redis:alpine"
+#############################################################
+
+#############################################################
+# Dockerfile
+FROM ubuntu:18.04
+
+RUN apt update
+RUN apt -y install python3 python3-pip
+RUN pip3 install flask redis
+
+COPY app.py /code/app.py
+
+WORKDIR /code
+
+CMD ["python3", "app.py"]
 #############################################################
 
 #############################################################
@@ -404,7 +418,7 @@ services:
 #######################################################
 
 #######################################################
-# debug.yml 
+# debug.yml
 version: '3'
 
 services:
@@ -458,9 +472,13 @@ $ docker run -p 3000:3000 gogs/gogs:latest
 ## CI
 
 ```bash
+# gogs+drone配置CI可能会失败多重装几次
+
 # 生成秘钥
 $ ssh-keygen -t rsa -f /tmp/id_rsa
 $ cat /tmp/id_rsa.pub >> ~/.ssh/authorized_keys
+
+# 复制私钥到drone的secrect
 
 # 配置gogs和drone需要使用DNS代替IP
 
@@ -515,19 +533,19 @@ services:
       # false 表示禁止注册
       - DRONE_OPEN=false
       # DRONE_ADMIN 配置的用户作为管理员
-      - DRONE_ADMIN=kuaibiancheng.com
+      - DRONE_ADMIN=atlednolispe
       # 本机主机名
-      - DRONE_HOST=http://111.231.98.114
+      - DRONE_HOST=http://192.168.63.130
       # 随机输入一个字符串
       - DRONE_SECRET=random_string_123
       # 使用 gogs 服务
       - DRONE_GOGS=true
       # gogs 的地址
-      - DRONE_GOGS_URL=http://111.231.98.114:3000
+      - DRONE_GOGS_URL=http://192.168.63.130:3000
       # gogs 的 git 用户名
-      - DRONE_GOGS_GIT_USERNAME=kuaibiancheng.com
+      - DRONE_GOGS_GIT_USERNAME=atlednolispe
       # 密码
-      - DRONE_GOGS_GIT_PASSWORD=123
+      - DRONE_GOGS_GIT_PASSWORD=password
       # 私有模式
       - DRONE_GOGS_PRIVATE_MODE=true
       # 关闭 ssl 验证（我们没有配置 https 访问）
@@ -556,11 +574,13 @@ pipeline:
   run:
     image: python:3.7-alpine3.8
     commands:
+      # 代码拉取后使用alpine镜像执行项目目录下a.py
       - python3 test.py
   deploy:
     image: appleboy/drone-ssh
-    host: 192.168.63.128
+    host: 192.168.63.130
     username: nike
+    # drone secrect添加ssh_key
     secrets: [ ssh_key ]
     port: 22
     script:
@@ -575,6 +595,7 @@ pipeline:
 docker build -t pywebimage .
 
 # del container
+# 因为不存在,第一次执行会失败
 docker rm -f pyweb
 
 # start new container
