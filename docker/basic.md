@@ -174,6 +174,9 @@ $ docker run -p 8081:80 \
     --mount type=bind,source="${PWD}"/index.html,target=/usr/share/nginx/html/test.html \
     --mount type=bind,source="${PWD}"/test.html,target=/usr/share/nginx/html/test1.html \
     nginx
+
+# docker bind模式下在CMD中mkdir,owner为root:root,对于文件操作时会导致permission deny,暂时的办法是up前先手动创建文件
+# !找一下更好的解决方案!
 ```
 
 ## Compose
