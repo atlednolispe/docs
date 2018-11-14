@@ -35,6 +35,8 @@ $ Android\Sdk\build-tools\28.0.3\aapt.exe dump badging C:\Users\atled\Downloads\
 ## [无线adb连接手机](https://www.jianshu.com/p/5270c08fe8af)
 
 ```
+# 推荐使用app: WiFi ADB
+
 # 手机开启usb
 1. adb tcpip 5555
 
