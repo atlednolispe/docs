@@ -31,3 +31,17 @@ $ Android\Sdk\build-tools\28.0.3\aapt.exe dump badging C:\Users\atled\Downloads\
 # 2
 # adb shell > logcat | grep cmp
 ```
+
+## [无线adb连接手机](https://www.jianshu.com/p/5270c08fe8af)
+
+```
+# 手机开启usb
+1. adb tcpip 5555
+
+2. adb connect/disconnect 192.168.1.108:5555
+
+# android adb devices offline
+# 重启adb服务
+$ adb kill-server
+$ adb start-server
+```
