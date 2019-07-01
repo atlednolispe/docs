@@ -153,4 +153,24 @@ MariaDB [(none)]> DROP USER 'monty'@'localhost';
 Query OK, 0 rows affected (0.00 sec)
 ```
 
+### MySQL修改配置文件tmpdir选项
+
+```
+$ mkdir -p /home/ll/databases/MySQL/tmpdir
+$ sudo chown -R mysql:mysql /home/ll/databases/MySQL/tmpdir
+$ sudo chmod -R 775 /home/ll/databases/MySQL/tmpdir
+
+$ sudo vim /etc/apparmor.d/local/usr.sbin.mysqld
+# /etc/apparmor.d/local/usr.sbin.mysqld
+/home/ll/databases/MySQL/tmpdir r,
+/home/ll/databases/MySQL/tmpdir/** rwk,
+$ sudo service apparmor reload
+
+$ sudo vim /etc/mysql/my.cnf
+# /etc/mysql/my.cnf
+# tmpdir                = /tmp
+tmpdir          = /home/ll/databases/MySQL/tmpdir
+$ sudo service mysql restart
+```
+
 ### 之后有别的使用再继续补充...
