@@ -607,3 +607,16 @@ docker run -d -p 5000:5000 --name pyweb pywebimage
 
 # plugins.drone.io
 ```
+
+## Questions
+
+```
+# Docker container logs use all my disk space
+
+# check disk used
+# use sudo or some dir have no permisson weren't seen
+sudo ncdu
+
+# add log size option
+docker xxx --log-opt max-size=50m
+```
